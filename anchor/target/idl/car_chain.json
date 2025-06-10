@@ -1,0 +1,1832 @@
+{
+  "address": "2HSinCzB6rzm5auGRiguh84EwBK6HG8r96gJHAsNt9Lh",
+  "metadata": {
+    "name": "car_chain",
+    "version": "0.1.0",
+    "spec": "0.1.0",
+    "description": "Created with Anchor"
+  },
+  "instructions": [
+    {
+      "name": "accept_buy_request",
+      "discriminator": [
+        33,
+        195,
+        15,
+        41,
+        51,
+        157,
+        57,
+        3
+      ],
+      "accounts": [
+        {
+          "name": "buy_request",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  98,
+                  117,
+                  121,
+                  95,
+                  114,
+                  101,
+                  113,
+                  117,
+                  101,
+                  115,
+                  116
+                ]
+              },
+              {
+                "kind": "arg",
+                "path": "vin"
+              },
+              {
+                "kind": "arg",
+                "path": "buyer"
+              }
+            ]
+          }
+        },
+        {
+          "name": "car",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  99,
+                  97,
+                  114
+                ]
+              },
+              {
+                "kind": "const",
+                "value": [
+                  213,
+                  203,
+                  174,
+                  72,
+                  101,
+                  187,
+                  26,
+                  156,
+                  162,
+                  106,
+                  235,
+                  120,
+                  33,
+                  172,
+                  120,
+                  64,
+                  166,
+                  161,
+                  166,
+                  250,
+                  117,
+                  121,
+                  227,
+                  15,
+                  125,
+                  123,
+                  237,
+                  33,
+                  83,
+                  26,
+                  147,
+                  157
+                ]
+              },
+              {
+                "kind": "arg",
+                "path": "vin"
+              }
+            ]
+          }
+        },
+        {
+          "name": "owner_pda",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  117,
+                  115,
+                  101,
+                  114
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "owner"
+              },
+              {
+                "kind": "account",
+                "path": "owner_pda.user_name",
+                "account": "UserAccount"
+              }
+            ]
+          }
+        },
+        {
+          "name": "buyer_pda",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  117,
+                  115,
+                  101,
+                  114
+                ]
+              },
+              {
+                "kind": "arg",
+                "path": "buyer"
+              },
+              {
+                "kind": "account",
+                "path": "buyer_pda.user_name",
+                "account": "UserAccount"
+              }
+            ]
+          }
+        },
+        {
+          "name": "owner",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "buyer_account",
+          "writable": true
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "vin",
+          "type": "string"
+        },
+        {
+          "name": "buyer",
+          "type": "pubkey"
+        }
+      ]
+    },
+    {
+      "name": "accept_confirmity_report",
+      "discriminator": [
+        130,
+        54,
+        197,
+        122,
+        209,
+        55,
+        145,
+        69
+      ],
+      "accounts": [
+        {
+          "name": "conformity_report",
+          "writable": true
+        },
+        {
+          "name": "car"
+        },
+        {
+          "name": "owner",
+          "writable": true,
+          "signer": true,
+          "relations": [
+            "car"
+          ]
+        }
+      ],
+      "args": [
+        {
+          "name": "report_id",
+          "type": "u64"
+        }
+      ]
+    },
+    {
+      "name": "accept_report",
+      "discriminator": [
+        126,
+        236,
+        199,
+        215,
+        130,
+        49,
+        73,
+        50
+      ],
+      "accounts": [
+        {
+          "name": "report",
+          "writable": true
+        },
+        {
+          "name": "car"
+        },
+        {
+          "name": "owner",
+          "writable": true,
+          "signer": true,
+          "relations": [
+            "car"
+          ]
+        }
+      ],
+      "args": [
+        {
+          "name": "report_id",
+          "type": "u64"
+        }
+      ]
+    },
+    {
+      "name": "cancel_for_sale",
+      "discriminator": [
+        190,
+        70,
+        179,
+        189,
+        209,
+        169,
+        254,
+        230
+      ],
+      "accounts": [
+        {
+          "name": "car_account",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  99,
+                  97,
+                  114
+                ]
+              },
+              {
+                "kind": "const",
+                "value": [
+                  213,
+                  203,
+                  174,
+                  72,
+                  101,
+                  187,
+                  26,
+                  156,
+                  162,
+                  106,
+                  235,
+                  120,
+                  33,
+                  172,
+                  120,
+                  64,
+                  166,
+                  161,
+                  166,
+                  250,
+                  117,
+                  121,
+                  227,
+                  15,
+                  125,
+                  123,
+                  237,
+                  33,
+                  83,
+                  26,
+                  147,
+                  157
+                ]
+              },
+              {
+                "kind": "arg",
+                "path": "vin"
+              }
+            ]
+          }
+        },
+        {
+          "name": "owner",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "vin",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "name": "issue_car_report",
+      "discriminator": [
+        167,
+        218,
+        23,
+        160,
+        66,
+        160,
+        98,
+        110
+      ],
+      "accounts": [
+        {
+          "name": "car_report",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  99,
+                  97,
+                  114,
+                  95,
+                  114,
+                  101,
+                  112,
+                  111,
+                  114,
+                  116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "car"
+              },
+              {
+                "kind": "account",
+                "path": "inspector_signer"
+              },
+              {
+                "kind": "arg",
+                "path": "report_id"
+              }
+            ]
+          }
+        },
+        {
+          "name": "car",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  99,
+                  97,
+                  114
+                ]
+              },
+              {
+                "kind": "const",
+                "value": [
+                  213,
+                  203,
+                  174,
+                  72,
+                  101,
+                  187,
+                  26,
+                  156,
+                  162,
+                  106,
+                  235,
+                  120,
+                  33,
+                  172,
+                  120,
+                  64,
+                  166,
+                  161,
+                  166,
+                  250,
+                  117,
+                  121,
+                  227,
+                  15,
+                  125,
+                  123,
+                  237,
+                  33,
+                  83,
+                  26,
+                  147,
+                  157
+                ]
+              },
+              {
+                "kind": "arg",
+                "path": "vin"
+              }
+            ]
+          }
+        },
+        {
+          "name": "inspector"
+        },
+        {
+          "name": "inspector_signer",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "report_id",
+          "type": "u64"
+        },
+        {
+          "name": "vin",
+          "type": "string"
+        },
+        {
+          "name": "overall_condition",
+          "type": "u8"
+        },
+        {
+          "name": "engine_condition",
+          "type": "u8"
+        },
+        {
+          "name": "body_condition",
+          "type": "u8"
+        },
+        {
+          "name": "full_report_uri",
+          "type": "string"
+        },
+        {
+          "name": "report_summary",
+          "type": "string"
+        },
+        {
+          "name": "notes",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "name": "issue_confirmity_report",
+      "discriminator": [
+        136,
+        200,
+        122,
+        12,
+        19,
+        28,
+        22,
+        135
+      ],
+      "accounts": [
+        {
+          "name": "conformity_report",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  99,
+                  111,
+                  110,
+                  102,
+                  111,
+                  114,
+                  109,
+                  105,
+                  116,
+                  121,
+                  95,
+                  114,
+                  101,
+                  112,
+                  111,
+                  114,
+                  116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "car"
+              },
+              {
+                "kind": "account",
+                "path": "confirmity_expert_signer"
+              },
+              {
+                "kind": "arg",
+                "path": "report_id"
+              }
+            ]
+          }
+        },
+        {
+          "name": "car",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  99,
+                  97,
+                  114
+                ]
+              },
+              {
+                "kind": "const",
+                "value": [
+                  213,
+                  203,
+                  174,
+                  72,
+                  101,
+                  187,
+                  26,
+                  156,
+                  162,
+                  106,
+                  235,
+                  120,
+                  33,
+                  172,
+                  120,
+                  64,
+                  166,
+                  161,
+                  166,
+                  250,
+                  117,
+                  121,
+                  227,
+                  15,
+                  125,
+                  123,
+                  237,
+                  33,
+                  83,
+                  26,
+                  147,
+                  157
+                ]
+              },
+              {
+                "kind": "arg",
+                "path": "vin"
+              }
+            ]
+          }
+        },
+        {
+          "name": "confirmity_expert"
+        },
+        {
+          "name": "confirmity_expert_signer",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "report_id",
+          "type": "u64"
+        },
+        {
+          "name": "vin",
+          "type": "string"
+        },
+        {
+          "name": "conformity_status",
+          "type": "bool"
+        },
+        {
+          "name": "modifications",
+          "type": "string"
+        },
+        {
+          "name": "full_report_uri",
+          "type": "string"
+        },
+        {
+          "name": "mines_stamp",
+          "type": "string"
+        },
+        {
+          "name": "notes",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "name": "register_car",
+      "discriminator": [
+        57,
+        224,
+        53,
+        202,
+        102,
+        187,
+        107,
+        159
+      ],
+      "accounts": [
+        {
+          "name": "car",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  99,
+                  97,
+                  114
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "government"
+              },
+              {
+                "kind": "arg",
+                "path": "vin"
+              }
+            ]
+          }
+        },
+        {
+          "name": "government",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "car_id",
+          "type": "string"
+        },
+        {
+          "name": "vin",
+          "type": "string"
+        },
+        {
+          "name": "brand",
+          "type": "string"
+        },
+        {
+          "name": "model",
+          "type": "string"
+        },
+        {
+          "name": "year",
+          "type": "u16"
+        },
+        {
+          "name": "color",
+          "type": "string"
+        },
+        {
+          "name": "engine_number",
+          "type": "string"
+        },
+        {
+          "name": "owner",
+          "type": "pubkey"
+        },
+        {
+          "name": "last_inspection_date",
+          "type": {
+            "option": "i64"
+          }
+        },
+        {
+          "name": "inspection_status",
+          "type": {
+            "defined": {
+              "name": "InspectionStatus"
+            }
+          }
+        },
+        {
+          "name": "latest_inspection_report",
+          "type": {
+            "option": "string"
+          }
+        },
+        {
+          "name": "mileage",
+          "type": "u32"
+        },
+        {
+          "name": "bump",
+          "type": "u8"
+        }
+      ]
+    },
+    {
+      "name": "register_user",
+      "discriminator": [
+        2,
+        241,
+        150,
+        223,
+        99,
+        214,
+        116,
+        97
+      ],
+      "accounts": [
+        {
+          "name": "user_account",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  117,
+                  115,
+                  101,
+                  114
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "user_signer"
+              },
+              {
+                "kind": "arg",
+                "path": "user_name"
+              }
+            ]
+          }
+        },
+        {
+          "name": "user_signer",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "user_name",
+          "type": "string"
+        },
+        {
+          "name": "public_data_uri",
+          "type": "string"
+        },
+        {
+          "name": "private_data_uri",
+          "type": "string"
+        },
+        {
+          "name": "encrypted_key_for_gov",
+          "type": "string"
+        },
+        {
+          "name": "encrypted_key_for_user",
+          "type": "string"
+        },
+        {
+          "name": "role",
+          "type": {
+            "defined": {
+              "name": "UserRoles"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "reject_buy_request",
+      "discriminator": [
+        51,
+        83,
+        13,
+        73,
+        88,
+        216,
+        29,
+        137
+      ],
+      "accounts": [
+        {
+          "name": "seller",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "car",
+          "writable": true
+        },
+        {
+          "name": "buy_request",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  98,
+                  117,
+                  121,
+                  95,
+                  114,
+                  101,
+                  113,
+                  117,
+                  101,
+                  115,
+                  116
+                ]
+              },
+              {
+                "kind": "arg",
+                "path": "vin"
+              },
+              {
+                "kind": "account",
+                "path": "buyer"
+              }
+            ]
+          }
+        },
+        {
+          "name": "buyer",
+          "writable": true
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "vin",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "name": "request_buy",
+      "discriminator": [
+        193,
+        121,
+        33,
+        50,
+        5,
+        139,
+        217,
+        133
+      ],
+      "accounts": [
+        {
+          "name": "buy_request",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  98,
+                  117,
+                  121,
+                  95,
+                  114,
+                  101,
+                  113,
+                  117,
+                  101,
+                  115,
+                  116
+                ]
+              },
+              {
+                "kind": "arg",
+                "path": "vin"
+              },
+              {
+                "kind": "account",
+                "path": "buyer"
+              }
+            ]
+          }
+        },
+        {
+          "name": "car",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  99,
+                  97,
+                  114
+                ]
+              },
+              {
+                "kind": "const",
+                "value": [
+                  213,
+                  203,
+                  174,
+                  72,
+                  101,
+                  187,
+                  26,
+                  156,
+                  162,
+                  106,
+                  235,
+                  120,
+                  33,
+                  172,
+                  120,
+                  64,
+                  166,
+                  161,
+                  166,
+                  250,
+                  117,
+                  121,
+                  227,
+                  15,
+                  125,
+                  123,
+                  237,
+                  33,
+                  83,
+                  26,
+                  147,
+                  157
+                ]
+              },
+              {
+                "kind": "arg",
+                "path": "vin"
+              }
+            ]
+          }
+        },
+        {
+          "name": "buyer_pda",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  117,
+                  115,
+                  101,
+                  114
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "buyer"
+              },
+              {
+                "kind": "account",
+                "path": "buyer_pda.user_name",
+                "account": "UserAccount"
+              }
+            ]
+          }
+        },
+        {
+          "name": "buyer",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "vin",
+          "type": "string"
+        },
+        {
+          "name": "message",
+          "type": {
+            "option": "string"
+          }
+        }
+      ]
+    },
+    {
+      "name": "set_for_sale",
+      "discriminator": [
+        131,
+        208,
+        118,
+        176,
+        138,
+        1,
+        171,
+        233
+      ],
+      "accounts": [
+        {
+          "name": "car_account",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  99,
+                  97,
+                  114
+                ]
+              },
+              {
+                "kind": "const",
+                "value": [
+                  213,
+                  203,
+                  174,
+                  72,
+                  101,
+                  187,
+                  26,
+                  156,
+                  162,
+                  106,
+                  235,
+                  120,
+                  33,
+                  172,
+                  120,
+                  64,
+                  166,
+                  161,
+                  166,
+                  250,
+                  117,
+                  121,
+                  227,
+                  15,
+                  125,
+                  123,
+                  237,
+                  33,
+                  83,
+                  26,
+                  147,
+                  157
+                ]
+              },
+              {
+                "kind": "arg",
+                "path": "vin"
+              }
+            ]
+          }
+        },
+        {
+          "name": "owner",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "vin",
+          "type": "string"
+        },
+        {
+          "name": "price",
+          "type": "u64"
+        }
+      ]
+    },
+    {
+      "name": "transfer_car",
+      "discriminator": [
+        135,
+        190,
+        247,
+        136,
+        102,
+        22,
+        79,
+        82
+      ],
+      "accounts": [
+        {
+          "name": "car",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  99,
+                  97,
+                  114
+                ]
+              },
+              {
+                "kind": "const",
+                "value": [
+                  213,
+                  203,
+                  174,
+                  72,
+                  101,
+                  187,
+                  26,
+                  156,
+                  162,
+                  106,
+                  235,
+                  120,
+                  33,
+                  172,
+                  120,
+                  64,
+                  166,
+                  161,
+                  166,
+                  250,
+                  117,
+                  121,
+                  227,
+                  15,
+                  125,
+                  123,
+                  237,
+                  33,
+                  83,
+                  26,
+                  147,
+                  157
+                ]
+              },
+              {
+                "kind": "arg",
+                "path": "vin"
+              }
+            ]
+          }
+        },
+        {
+          "name": "current_owner",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "new_owner",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "new_owner_pda",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  117,
+                  115,
+                  101,
+                  114
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "new_owner"
+              },
+              {
+                "kind": "arg",
+                "path": "user_name"
+              }
+            ]
+          }
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "vin",
+          "type": "string"
+        },
+        {
+          "name": "user_name",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "name": "verify_user",
+      "discriminator": [
+        127,
+        54,
+        157,
+        106,
+        85,
+        167,
+        116,
+        119
+      ],
+      "accounts": [
+        {
+          "name": "user_account",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  117,
+                  115,
+                  101,
+                  114
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "user_account.authority",
+                "account": "UserAccount"
+              },
+              {
+                "kind": "arg",
+                "path": "user_name"
+              }
+            ]
+          }
+        },
+        {
+          "name": "government",
+          "signer": true
+        }
+      ],
+      "args": [
+        {
+          "name": "user_name",
+          "type": "string"
+        },
+        {
+          "name": "approve",
+          "type": "bool"
+        }
+      ]
+    }
+  ],
+  "accounts": [
+    {
+      "name": "BuyRequest",
+      "discriminator": [
+        175,
+        29,
+        113,
+        183,
+        180,
+        108,
+        205,
+        201
+      ]
+    },
+    {
+      "name": "CarAccount",
+      "discriminator": [
+        164,
+        111,
+        205,
+        167,
+        132,
+        100,
+        131,
+        126
+      ]
+    },
+    {
+      "name": "CarReport",
+      "discriminator": [
+        54,
+        102,
+        151,
+        245,
+        235,
+        240,
+        75,
+        173
+      ]
+    },
+    {
+      "name": "ConformityReport",
+      "discriminator": [
+        23,
+        134,
+        53,
+        103,
+        246,
+        22,
+        62,
+        136
+      ]
+    },
+    {
+      "name": "UserAccount",
+      "discriminator": [
+        211,
+        33,
+        136,
+        16,
+        186,
+        110,
+        242,
+        127
+      ]
+    }
+  ],
+  "errors": [
+    {
+      "code": 6000,
+      "name": "InvalidReport",
+      "msg": "Invalid report - car mismatch"
+    },
+    {
+      "code": 6001,
+      "name": "NotAuthorizedConfirmityExpert",
+      "msg": "Not authorized: user is not a conformity expert"
+    },
+    {
+      "code": 6002,
+      "name": "ConfirmityExpertNotVerified",
+      "msg": "Conformity expert is not verified"
+    },
+    {
+      "code": 6003,
+      "name": "ModificationsTooLong",
+      "msg": "Modifications field too long"
+    },
+    {
+      "code": 6004,
+      "name": "StampTooLong",
+      "msg": "Mines stamp field too long"
+    },
+    {
+      "code": 6005,
+      "name": "NotesTooLong",
+      "msg": "Notes field too long"
+    }
+  ],
+  "types": [
+    {
+      "name": "BuyRequest",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "vin",
+            "type": "string"
+          },
+          {
+            "name": "buyer",
+            "type": "pubkey"
+          },
+          {
+            "name": "seller",
+            "type": "pubkey"
+          },
+          {
+            "name": "amount",
+            "type": "u64"
+          },
+          {
+            "name": "status",
+            "type": {
+              "defined": {
+                "name": "BuyRequestStatus"
+              }
+            }
+          },
+          {
+            "name": "created_at",
+            "type": "i64"
+          },
+          {
+            "name": "message",
+            "type": {
+              "option": "string"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "BuyRequestStatus",
+      "type": {
+        "kind": "enum",
+        "variants": [
+          {
+            "name": "Pending"
+          },
+          {
+            "name": "Accepted"
+          },
+          {
+            "name": "Rejected"
+          }
+        ]
+      }
+    },
+    {
+      "name": "CarAccount",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "car_id",
+            "type": "string"
+          },
+          {
+            "name": "vin",
+            "type": "string"
+          },
+          {
+            "name": "brand",
+            "type": "string"
+          },
+          {
+            "name": "model",
+            "type": "string"
+          },
+          {
+            "name": "year",
+            "type": "u16"
+          },
+          {
+            "name": "color",
+            "type": "string"
+          },
+          {
+            "name": "engine_number",
+            "type": "string"
+          },
+          {
+            "name": "owner",
+            "type": "pubkey"
+          },
+          {
+            "name": "registered_by",
+            "type": "pubkey"
+          },
+          {
+            "name": "registration_date",
+            "type": {
+              "option": "i64"
+            }
+          },
+          {
+            "name": "is_active",
+            "type": "bool"
+          },
+          {
+            "name": "transfer_count",
+            "type": "u32"
+          },
+          {
+            "name": "last_inspection_date",
+            "type": {
+              "option": "i64"
+            }
+          },
+          {
+            "name": "inspection_status",
+            "type": {
+              "defined": {
+                "name": "InspectionStatus"
+              }
+            }
+          },
+          {
+            "name": "latest_inspection_report",
+            "type": {
+              "option": "string"
+            }
+          },
+          {
+            "name": "mileage",
+            "type": "u32"
+          },
+          {
+            "name": "is_for_sale",
+            "type": "bool"
+          },
+          {
+            "name": "sale_price",
+            "type": {
+              "option": "u64"
+            }
+          },
+          {
+            "name": "bump",
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "CarReport",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "report_id",
+            "type": "u64"
+          },
+          {
+            "name": "car",
+            "type": "pubkey"
+          },
+          {
+            "name": "inspector",
+            "type": "pubkey"
+          },
+          {
+            "name": "car_owner",
+            "type": "pubkey"
+          },
+          {
+            "name": "report_date",
+            "type": "i64"
+          },
+          {
+            "name": "overall_condition",
+            "type": "u8"
+          },
+          {
+            "name": "engine_condition",
+            "type": "u8"
+          },
+          {
+            "name": "body_condition",
+            "type": "u8"
+          },
+          {
+            "name": "full_report_uri",
+            "type": "string"
+          },
+          {
+            "name": "report_summary",
+            "type": "string"
+          },
+          {
+            "name": "approved_by_owner",
+            "type": "bool"
+          },
+          {
+            "name": "notes",
+            "type": "string"
+          },
+          {
+            "name": "bump",
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "ConformityReport",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "report_id",
+            "type": "u64"
+          },
+          {
+            "name": "car",
+            "type": "pubkey"
+          },
+          {
+            "name": "confirmity_expert",
+            "type": "pubkey"
+          },
+          {
+            "name": "car_owner",
+            "type": "pubkey"
+          },
+          {
+            "name": "report_date",
+            "type": "i64"
+          },
+          {
+            "name": "conformity_status",
+            "type": "bool"
+          },
+          {
+            "name": "modifications",
+            "type": "string"
+          },
+          {
+            "name": "mines_stamp",
+            "type": "string"
+          },
+          {
+            "name": "full_report_uri",
+            "type": "string"
+          },
+          {
+            "name": "accepted_by_owner",
+            "type": "bool"
+          },
+          {
+            "name": "notes",
+            "type": "string"
+          },
+          {
+            "name": "bump",
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "InspectionStatus",
+      "type": {
+        "kind": "enum",
+        "variants": [
+          {
+            "name": "Pending"
+          },
+          {
+            "name": "Passed"
+          },
+          {
+            "name": "Failed"
+          },
+          {
+            "name": "Expired"
+          }
+        ]
+      }
+    },
+    {
+      "name": "UserAccount",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "authority",
+            "type": "pubkey"
+          },
+          {
+            "name": "user_name",
+            "type": "string"
+          },
+          {
+            "name": "public_data_uri",
+            "type": "string"
+          },
+          {
+            "name": "private_data_uri",
+            "type": "string"
+          },
+          {
+            "name": "encrypted_key_for_gov",
+            "type": "string"
+          },
+          {
+            "name": "encrypted_key_for_user",
+            "type": "string"
+          },
+          {
+            "name": "role",
+            "type": {
+              "defined": {
+                "name": "UserRoles"
+              }
+            }
+          },
+          {
+            "name": "verification_status",
+            "type": {
+              "defined": {
+                "name": "VerificationStatus"
+              }
+            }
+          },
+          {
+            "name": "verified_at",
+            "type": {
+              "option": "i64"
+            }
+          },
+          {
+            "name": "verified_by",
+            "type": {
+              "option": "pubkey"
+            }
+          },
+          {
+            "name": "created_at",
+            "type": "i64"
+          },
+          {
+            "name": "updated_at",
+            "type": "i64"
+          },
+          {
+            "name": "bump",
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "UserRoles",
+      "type": {
+        "kind": "enum",
+        "variants": [
+          {
+            "name": "Normal"
+          },
+          {
+            "name": "Inspector"
+          },
+          {
+            "name": "ConfirmityExpert"
+          },
+          {
+            "name": "Government"
+          }
+        ]
+      }
+    },
+    {
+      "name": "VerificationStatus",
+      "type": {
+        "kind": "enum",
+        "variants": [
+          {
+            "name": "Pending"
+          },
+          {
+            "name": "Verified"
+          },
+          {
+            "name": "Rejected"
+          }
+        ]
+      }
+    }
+  ]
+}

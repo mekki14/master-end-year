@@ -1,5 +1,6 @@
 // components/CarCard.tsx
 import React from 'react';
+import { motion } from 'framer-motion';
 import { 
   Car, 
   Calendar, 
@@ -11,7 +12,10 @@ import {
   ShoppingCart,
   CheckCircle,
   Clock,
-  AlertCircle
+  AlertCircle,
+  Crown,
+  Sparkles,
+  ArrowRight
 } from 'lucide-react';
 import { LAMPORTS_PER_SOL } from '@solana/web3.js';
 
@@ -29,7 +33,6 @@ interface CarCardProps {
     mileage: number;
     salePrice: number;
     inspectionStatus: 'valid' | 'pending' | 'expired';
-   
     location: string;
     createdAt: string;
   };
@@ -51,116 +54,229 @@ const CarCard: React.FC<CarCardProps> = ({
   const isOwner = currentUserPublicKey === car.owner;
   const priceInSOL = car.salePrice / LAMPORTS_PER_SOL;
 
-  const getInspectionStatusColor = (status: string) => {
+  const getInspectionStatusConfig = (status: string) => {
     switch (status) {
-      case 'valid': return 'text-green-600 bg-green-100';
-      case 'pending': return 'text-yellow-600 bg-yellow-100';
-      case 'expired': return 'text-red-600 bg-red-100';
-      default: return 'text-gray-600 bg-gray-100';
+      case 'valid': 
+        return {
+          color: 'text-emerald-300 bg-emerald-500/20 border-emerald-500/30',
+          icon: <CheckCircle className="w-3 h-3" />,
+          glow: 'shadow-emerald-500/20'
+        };
+      case 'pending': 
+        return {
+          color: 'text-amber-300 bg-amber-500/20 border-amber-500/30',
+          icon: <Clock className="w-3 h-3" />,
+          glow: 'shadow-amber-500/20'
+        };
+      case 'expired': 
+        return {
+          color: 'text-red-300 bg-red-500/20 border-red-500/30',
+          icon: <AlertCircle className="w-3 h-3" />,
+          glow: 'shadow-red-500/20'
+        };
+      default: 
+        return {
+          color: 'text-slate-300 bg-slate-500/20 border-slate-500/30',
+          icon: <AlertCircle className="w-3 h-3" />,
+          glow: 'shadow-slate-500/20'
+        };
     }
   };
 
-  const getInspectionIcon = (status: string) => {
-    switch (status) {
-      case 'valid': return <CheckCircle className="w-3 h-3" />;
-      case 'pending': return <Clock className="w-3 h-3" />;
-      case 'expired': return <AlertCircle className="w-3 h-3" />;
-      default: return <AlertCircle className="w-3 h-3" />;
-    }
-  };
+  const inspectionConfig = getInspectionStatusConfig(car.inspectionStatus);
 
   return (
-    <div className="card bg-gray-800 shadow-lg hover:shadow-xl transition-all duration-300 group">
-      {/* Image */}
-      <div className="relative h-48 overflow-hidden rounded-t-lg">
-        {/* <img
-          src={car.images[0] || `/api/placeholder/400/200`}
-          alt={`${car.brand} ${car.model}`}
-          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-        /> */}
+    <motion.div 
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      whileHover={{ 
+        y: -8,
+        transition: { duration: 0.2 }
+      }}
+      className="group relative bg-gradient-to-br from-slate-800/50 to-slate-900/50 backdrop-blur-sm border border-purple-500/20 rounded-3xl shadow-xl hover:shadow-purple-500/20 transition-all duration-300 overflow-hidden"
+    >
+      {/* Background Gradient Effect */}
+      <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-purple-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+      
+      {/* Image Section */}
+      <div className="relative h-48 overflow-hidden rounded-t-3xl bg-gradient-to-br from-slate-700 to-purple-900/50">
+        {/* Placeholder Car Icon */}
+        <div className="absolute inset-0 flex items-center justify-center">
+          <motion.div
+            animate={{ 
+              rotate: [0, 5, -5, 0],
+              scale: [1, 1.1, 1]
+            }}
+            transition={{ 
+              duration: 4, 
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}
+            className="text-purple-400/30"
+          >
+            <Car className="w-20 h-20" />
+          </motion.div>
+        </div>
         
+        {/* Floating Elements */}
+        <div className="absolute inset-0">
+          <motion.div
+            animate={{ 
+              x: [0, 10, -10, 0],
+              y: [0, -5, 5, 0],
+            }}
+            transition={{ 
+              duration: 6, 
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}
+            className="absolute top-6 left-6"
+          >
+            <Sparkles className="w-4 h-4 text-purple-400/40" />
+          </motion.div>
+          <motion.div
+            animate={{ 
+              x: [0, -8, 8, 0],
+              y: [0, 8, -8, 0],
+            }}
+            transition={{ 
+              duration: 8, 
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: 2
+            }}
+            className="absolute bottom-6 right-6"
+          >
+            <Sparkles className="w-3 h-3 text-purple-400/30" />
+          </motion.div>
+        </div>
+
         {/* Overlay Actions */}
         <div className="absolute top-4 right-4 flex space-x-2">
-          <button
+          <motion.button
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
             onClick={onToggleFavorite}
-            className={`btn btn-circle btn-sm ${
-              isFavorite ? 'btn-error text-white' : 'btn-ghost bg-gray-900/80 hover:bg-gray-900'
-            } backdrop-blur-sm`}
+            className={`w-10 h-10 rounded-2xl backdrop-blur-sm border transition-all duration-200 flex items-center justify-center ${
+              isFavorite 
+                ? 'bg-rose-500/80 border-rose-400/50 text-white shadow-lg shadow-rose-500/25' 
+                : 'bg-slate-800/60 border-slate-600/50 text-slate-300 hover:bg-slate-700/60 hover:border-slate-500/50 hover:text-white'
+            }`}
           >
             <Heart className={`w-4 h-4 ${isFavorite ? 'fill-current' : ''}`} />
-          </button>
+          </motion.button>
         </div>
 
         {/* Price Badge */}
         <div className="absolute top-4 left-4">
-          <div className="badge badge-primary badge-lg font-bold text-white">
+          <motion.div 
+            whileHover={{ scale: 1.05 }}
+            className="bg-gradient-to-r from-purple-600 to-purple-700 text-white px-4 py-2 rounded-2xl font-bold text-lg shadow-lg shadow-purple-500/25 border border-purple-400/30"
+          >
             {priceInSOL.toFixed(2)} SOL
-          </div>
+          </motion.div>
         </div>
 
         {/* Inspection Status */}
         {/* <div className="absolute bottom-4 left-4">
-          <div className={`px-2 py-1 rounded-full text-xs font-medium flex items-center space-x-1 ${getInspectionStatusColor(car.inspectionStatus)}`}>
-            {getInspectionIcon(car.inspectionStatus)}
+          <motion.div 
+            whileHover={{ scale: 1.05 }}
+            className={`px-3 py-2 rounded-xl text-xs font-semibold flex items-center space-x-2 border backdrop-blur-sm ${inspectionConfig.color} ${inspectionConfig.glow}`}
+          >
+            {inspectionConfig.icon}
             <span className="capitalize">{car.inspectionStatus}</span>
-          </div>
+          </motion.div>
         </div> */}
       </div>
 
-      {/* Content */}
-      <div className="card-body p-6">
+      {/* Content Section */}
+      <div className="relative p-6 space-y-4">
         {/* Title */}
-        <div className="flex justify-between items-start mb-3">
-          <h3 className="card-title text-lg font-bold text-gray-100">
+        <div className="flex justify-between items-start">
+          <motion.h3 
+            className="text-xl font-bold text-white group-hover:text-purple-200 transition-colors duration-200"
+            whileHover={{ x: 5 }}
+          >
             {car.brand} {car.model}
-          </h3>
-          <span className="text-sm text-gray-400">#{car.carId}</span>
+          </motion.h3>
+          <span className="text-sm text-purple-300/60 font-mono bg-purple-500/10 px-2 py-1 rounded-lg">
+            #{car.carId}
+          </span>
         </div>
 
         {/* Details Grid */}
-        <div className="grid grid-cols-2 gap-3 mb-4">
-          <div className="flex items-center text-sm text-gray-300">
-            <Calendar className="w-4 h-4 mr-2 text-indigo-400" />
-            <span>{car.year}</span>
-          </div>
-          <div className="flex items-center text-sm text-gray-300">
-            <Gauge className="w-4 h-4 mr-2 text-indigo-400" />
-            <span>{car.mileage.toLocaleString()} km</span>
-          </div>
-          <div className="flex items-center text-sm text-gray-300">
-            <Palette className="w-4 h-4 mr-2 text-indigo-400" />
-            <span className="capitalize">{car.color}</span>
-          </div>
+        <div className="grid grid-cols-2 gap-4">
+          <motion.div 
+            className="flex items-center text-sm text-purple-200/80 bg-slate-800/30 rounded-xl p-3 border border-purple-500/20"
+            whileHover={{ scale: 1.02 }}
+          >
+            <Calendar className="w-4 h-4 mr-2 text-purple-400" />
+            <span className="font-medium">{car.year}</span>
+          </motion.div>
+          
+          <motion.div 
+            className="flex items-center text-sm text-purple-200/80 bg-slate-800/30 rounded-xl p-3 border border-purple-500/20"
+            whileHover={{ scale: 1.02 }}
+          >
+            <Gauge className="w-4 h-4 mr-2 text-purple-400" />
+            <span className="font-medium">{car.mileage.toLocaleString()} km</span>
+          </motion.div>
+          
+          <motion.div 
+            className="flex items-center text-sm text-purple-200/80 bg-slate-800/30 rounded-xl p-3 border border-purple-500/20 col-span-2"
+            whileHover={{ scale: 1.02 }}
+          >
+            <Palette className="w-4 h-4 mr-2 text-purple-400" />
+            <span className="font-medium capitalize">{car.color}</span>
+          </motion.div>
         </div>
 
-        
-
         {/* Actions */}
-        <div className="card-actions justify-between">
-          <button
+        <div className="flex gap-3 pt-2">
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
             onClick={onViewDetails}
-            className="btn btn-ghost btn-sm flex-1 mr-2 text-gray-300 hover:text-gray-100"
+            className="flex-1 bg-slate-800/50 hover:bg-slate-700/50 text-purple-300 hover:text-white border border-purple-500/30 hover:border-purple-400/50 rounded-2xl px-4 py-3 font-semibold transition-all duration-200 flex items-center justify-center gap-2 group/btn"
           >
-            <Eye className="w-4 h-4 mr-1" />
-            Details
-          </button>
+            <Eye className="w-4 h-4" />
+            <span>Details</span>
+            <ArrowRight className="w-4 h-4 opacity-0 group-hover/btn:opacity-100 transform translate-x-[-10px] group-hover/btn:translate-x-0 transition-all duration-200" />
+          </motion.button>
           
-          {!isOwner && (
-            <button
+          {!isOwner ? (
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
               onClick={onBuyRequest}
-              className="btn btn-primary btn-sm flex-1"
+              className="flex-1 bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800 text-white rounded-2xl px-4 py-3 font-semibold shadow-lg shadow-purple-500/25 hover:shadow-purple-500/40 transition-all duration-200 flex items-center justify-center gap-2 group/btn"
             >
-              <ShoppingCart className="w-4 h-4 mr-1" />
-              Buy Request
-            </button>
-          )}
-          
-          {isOwner && (
-            <div className="badge badge-info">Your Car</div>
+              <ShoppingCart className="w-4 h-4" />
+              <span>Buy Request</span>
+              <motion.div
+                animate={{ rotate: [0, 15, -15, 0] }}
+                transition={{ duration: 2, repeat: Infinity }}
+                className="opacity-0 group-hover/btn:opacity-100 transition-opacity duration-200"
+              >
+                <Sparkles className="w-3 h-3" />
+              </motion.div>
+            </motion.button>
+          ) : (
+            <motion.div
+              initial={{ scale: 0.9 }}
+              animate={{ scale: 1 }}
+              className="flex-1 bg-gradient-to-r from-amber-500/20 to-amber-600/20 border border-amber-400/30 text-amber-300 rounded-2xl px-4 py-3 font-semibold flex items-center justify-center gap-2"
+            >
+              <Crown className="w-4 h-4" />
+              <span>Your Car</span>
+            </motion.div>
           )}
         </div>
       </div>
-    </div>
+
+      {/* Bottom Glow Effect */}
+      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-purple-500/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+    </motion.div>
   );
 };
 

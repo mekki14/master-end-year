@@ -49,7 +49,7 @@ export interface CarData {
   bump: number;
 }
 
-const GOVERNMENT_AUTHORITY = new PublicKey('FPZyc6E2jqfjdWJe7j1Rn4Ac4FC12CR5uRsisMaEKoT2'); // Replace with actual key
+export const GOVERNMENT_AUTHORITY = new PublicKey('FPZyc6E2jqfjdWJe7j1Rn4Ac4FC12CR5uRsisMaEKoT2'); // Replace with actual key
 
 
 export function useCreateCarReport() {
